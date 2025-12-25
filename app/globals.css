@@ -1,78 +1,126 @@
 @import "tailwindcss";
-/* Force rebuild */
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:is(.dark *));
 
-:root {
-  --background: #FFFFFF;
-  --foreground: #18181B;
-  --card: #FFFFFF;
-  --card-foreground: #18181B;
-  --popover: #FFFFFF;
-  --popover-foreground: #18181B;
-  --primary: #881E1E;
-  --primary-foreground: #ffffff;
-  --secondary: #F4F4F5;
-  --secondary-foreground: #18181B;
-  --muted: #F4F4F5;
-  --muted-foreground: #71717A;
-  --accent: #F4F4F5;
-  --accent-foreground: #18181B;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #E4E4E7;
-  --input: #E4E4E7;
-  --ring: #881E1E;
-}
-
-.dark {
-  --background: #0E0E11;
-  --foreground: #FAFAFA;
-  --card: #1A1A1A;
-  --card-foreground: #FAFAFA;
-  --popover: #1A1A1A;
-  --popover-foreground: #FAFAFA;
-  --primary: #881E1E;
-  --primary-foreground: #ffffff;
-  --secondary: #27272A;
-  --secondary-foreground: #FAFAFA;
-  --muted: #27272A;
-  --muted-foreground: #A1A1AA;
-  --accent: #27272A;
-  --accent-foreground: #FAFAFA;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #27272A;
-  --input: #27272A;
-  --ring: #881E1E;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
+@theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+:root {
+  --background: #ffffff;
+  --foreground: #18181b;
+  --card: #ffffff;
+  --card-foreground: #18181b;
+  --popover: #ffffff;
+  --popover-foreground: #18181b;
+  --primary: #881E1E;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #881E1E;
+  --chart-1: #e76e50;
+  --chart-2: #2a9d8f;
+  --chart-3: #264653;
+  --chart-4: #e9c46a;
+  --chart-5: #f4a261;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: #0E0E11;
+  --foreground: #fafafa;
+  --card: #1A1A1A;
+  --card-foreground: #fafafa;
+  --popover: #1A1A1A;
+  --popover-foreground: #fafafa;
+  --primary: #881E1E;
+  --primary-foreground: #ffffff;
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+  --destructive: #7f1d1d;
+  --destructive-foreground: #fafafa;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #881E1E;
+  --chart-1: #22075e;
+  --chart-2: #5925dc;
+  --chart-3: #875bf7;
+  --chart-4: #c4b5fd;
+  --chart-5: #f4f3ff;
+}
+
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom styles for WaveSurfer Regions */
+/* Target various potential selectors for robustness */
+[data-region-handle],
+.wavesurfer-handle,
+.wavesurfer-region-handle,
+div[part*="handle"] {
+  width: 10px !important;
+  /* Make the hit area reasonable */
+  background-color: transparent !important;
+  /* Hide the default background */
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  cursor: ew-resize;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  pointer-events: auto;
+}
+
+/* The Circle (Lollipop head) */
+[data-region-handle]::after,
+.wavesurfer-handle::after,
+.wavesurfer-region-handle::after,
+div[part*="handle"]::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  background-color: var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* The Line (Lollipop stick) */
+[data-region-handle]::before,
+.wavesurfer-handle::before,
+.wavesurfer-region-handle::before,
+div[part*="handle"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--primary);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+  pointer-events: none;
 }
