@@ -89,7 +89,7 @@ export default function TwitterVideoTool() {
                 return;
             }
 
-            const url = URL.createObjectURL(new Blob([uint8Data], { type: 'video/mp4' }));
+            const url = URL.createObjectURL(new Blob([uint8Data as unknown as BlobPart], { type: 'video/mp4' }));
             setVideoUrl(url);
         } catch (error) {
             console.error(error);
