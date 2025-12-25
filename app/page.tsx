@@ -4,7 +4,8 @@ import React from 'react';
 import { useTheme } from 'next-themes';
 
 const tools = [
-  { id: 'twitter-high-quality-upload', name: '트위터 이미지 고화질로 업로드', description: 'PNG 투명 픽셀 주입으로 압축 우회', emoji: '🐦', icon: '/icons/twitter-high-quality-upload.png', category: 'media', tags: ['Twitter', 'PNG', '압축 우회'], color: 'bg-[color-mix(in_srgb,var(--primary),transparent_90%)] text-[var(--primary)]' },
+  { id: 'twitter-high-quality-upload', name: '트위터 이미지 고화질로 업로드', description: 'PNG 투명 픽셀 주입으로 압축 우회', emoji: '🐦', icon: '/icons/twitter-high-quality-upload.png', category: 'media', tags: ['Twitter', 'PNG', '압축 우회'], color: 'bg-secondary text-foreground' },
+  { id: 'twitter-image-to-video', name: '트위터용 동영상 변환기', description: '이미지를 2초 길이의 MP4로 변환', emoji: '🎬', icon: '/icons/twitter-image-to-video.png', category: 'media', tags: ['Twitter', 'Video', 'MP4'], color: 'bg-secondary text-foreground' },
 ];
 
 const categories: Record<string, string> = {
