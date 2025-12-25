@@ -8,7 +8,7 @@ import { fetchFile, toBlobURL } from '@ffmpeg/util';
 export default function TwitterVideoTool() {
     const [loaded, setLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const ffmpegRef = useRef(new FFmpeg());
+    const ffmpegRef = useRef<FFmpeg | null>(null);
     const messageRef = useRef<HTMLParagraphElement | null>(null);
 
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -19,7 +19,8 @@ export default function TwitterVideoTool() {
     const load = async () => {
         setIsLoading(true);
         const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
-        const ffmpeg = ffmpegRef.current;
+        const ffmpeg = new FFmpeg();
+        ffmpegRef.current = ffmpeg;
         ffmpeg.on('log', ({ message }) => {
             if (messageRef.current) messageRef.current.innerHTML = message;
             console.log(message);
@@ -52,7 +53,7 @@ export default function TwitterVideoTool() {
     };
 
     const convertToVideo = async () => {
-        if (!selectedFile || !loaded) return;
+        if (!selectedFile || !loaded || !ffmpegRef.current) return;
 
         setIsConverting(true);
         setProgress(0);
