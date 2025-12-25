@@ -4,16 +4,7 @@ import React from 'react';
 import { useTheme } from 'next-themes';
 
 const tools = [
-  { id: 'video-converter', name: '동영상 변환', description: 'MP4, WebM 등 다양한 포맷 지원', emoji: '🎬', category: 'media', tags: ['MP4', 'WebM'], color: 'bg-red-500/10 text-red-500' },
-  { id: 'image-compress', name: '이미지 압축', description: 'PNG, JPG 용량 줄이기', emoji: '🖼️', category: 'media', tags: ['PNG', 'JPG'], color: 'bg-green-500/10 text-green-500' },
-  { id: 'image-resize', name: '이미지 리사이즈', description: '원하는 크기로 조절', emoji: '📐', category: 'media', tags: ['크기 조절'], color: 'bg-blue-500/10 text-blue-500' },
-  { id: 'gif-converter', name: 'GIF 변환', description: '동영상을 GIF로 만들기', emoji: '🎞️', category: 'media', tags: ['GIF', '동영상'], color: 'bg-purple-500/10 text-purple-500' },
-  { id: 'pdf-converter', name: 'PDF 변환', description: '문서를 PDF로 변환', emoji: '📄', category: 'document', tags: ['PDF', '문서'], color: 'bg-orange-500/10 text-orange-500' },
-  { id: 'qr-generator', name: 'QR 코드 생성', description: '링크를 QR 코드로', emoji: '📱', category: 'dev', tags: ['QR', '바코드'], color: 'bg-cyan-500/10 text-cyan-500' },
-  { id: 'json-formatter', name: 'JSON 포매터', description: '복잡한 JSON을 보기 좋게', emoji: '🔧', category: 'dev', tags: ['JSON', '정렬'], color: 'bg-yellow-500/10 text-yellow-500' },
-  { id: 'base64-encoder', name: 'Base64 인코더', description: '텍스트를 Base64로 변환', emoji: '🔐', category: 'dev', tags: ['인코딩'], color: 'bg-pink-500/10 text-pink-500' },
-  { id: 'color-converter', name: '색상 변환기', description: 'HEX, RGB 변환', emoji: '🎨', category: 'utility', tags: ['HEX', 'RGB'], color: 'bg-indigo-500/10 text-indigo-500' },
-  { id: 'unit-converter', name: '단위 변환기', description: '길이, 무게 등 단위 변환', emoji: '📏', category: 'utility', tags: ['길이', '무게'], color: 'bg-teal-500/10 text-teal-500' },
+  { id: 'twitter-high-quality-upload', name: '트위터 이미지 고화질로 업로드', description: 'PNG 투명 픽셀 주입으로 압축 우회', emoji: '🐦', icon: '/icons/twitter-high-quality-upload.png', category: 'media', tags: ['Twitter', 'PNG', '압축 우회'], color: 'bg-blue-500/10 text-blue-500' },
 ];
 
 const categories: Record<string, string> = {
@@ -23,14 +14,19 @@ const categories: Record<string, string> = {
   utility: '유틸리티',
 };
 
-function ToolItem({ tool }: { tool: typeof tools[0] }) {
+function ToolItem({ tool }: { tool: typeof tools[0] & { icon?: string } }) {
   return (
     <a
-      href={`/tools/${tool.id}`}
+      href={`/${tool.id}`}
       className="flex items-center gap-4 py-4 px-2 -mx-2 hover:bg-black/5 dark:hover:bg-white/10 active:scale-95 rounded-[24px] transition-all duration-200 group"
     >
-      <div className={`w-12 h-12 ${tool.color} rounded-[20px] flex items-center justify-center text-2xl shrink-0`}>
-        {tool.emoji}
+      <div className={`w-12 h-12 ${tool.color} rounded-[20px] flex items-center justify-center text-2xl shrink-0 overflow-hidden`}>
+        {tool.icon ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={tool.icon} alt={tool.name} className="w-[75%] h-[75%] object-cover" />
+        ) : (
+          tool.emoji
+        )}
       </div>
       <div className="flex-1 min-w-0 flex flex-col justify-center">
         <span className="text-[#191f28] dark:text-white font-bold text-[17px] leading-snug">{tool.name}</span>
