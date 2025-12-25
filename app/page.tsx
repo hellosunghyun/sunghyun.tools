@@ -4,7 +4,7 @@ import React from 'react';
 import { useTheme } from 'next-themes';
 
 const tools = [
-  { id: 'twitter-high-quality-upload', name: '트위터 이미지 고화질로 업로드', description: 'PNG 투명 픽셀 주입으로 압축 우회', emoji: '🐦', icon: '/icons/twitter-high-quality-upload.png', category: 'media', tags: ['Twitter', 'PNG', '압축 우회'], color: 'bg-blue-500/10 text-blue-500' },
+  { id: 'twitter-high-quality-upload', name: '트위터 이미지 고화질로 업로드', description: 'PNG 투명 픽셀 주입으로 압축 우회', emoji: '🐦', icon: '/icons/twitter-high-quality-upload.png', category: 'media', tags: ['Twitter', 'PNG', '압축 우회'], color: 'bg-[color-mix(in_srgb,var(--primary),transparent_90%)] text-[var(--primary)]' },
 ];
 
 const categories: Record<string, string> = {
@@ -29,10 +29,10 @@ function ToolItem({ tool }: { tool: typeof tools[0] & { icon?: string } }) {
         )}
       </div>
       <div className="flex-1 min-w-0 flex flex-col justify-center">
-        <span className="text-[#191f28] dark:text-white font-bold text-[17px] leading-snug">{tool.name}</span>
-        <span className="text-[#8b95a1] dark:text-[#b0b8c1] text-[14px] font-medium leading-snug mt-0.5">{tool.description}</span>
+        <span className="text-foreground font-bold text-[17px] leading-snug">{tool.name}</span>
+        <span className="text-muted-foreground text-[14px] font-medium leading-snug mt-0.5">{tool.description}</span>
       </div>
-      <div className="text-[#b0b8c1] dark:text-[#6b7684]">
+      <div className="text-muted-foreground">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
       </div>
     </a>
@@ -43,7 +43,7 @@ function Section({ title, children, action }: { title: string; children: React.R
   return (
     <section className="mb-12">
       <div className="flex items-center justify-between mb-4 px-2">
-        <h2 className="text-[#191f28] dark:text-white font-bold text-[22px]">
+        <h2 className="text-foreground font-bold text-[22px]">
           {title}
         </h2>
         {action}
@@ -63,7 +63,7 @@ function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <button className="w-10 h-10 flex items-center justify-center text-[#b0b8c1] hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors">
+      <button className="w-10 h-10 flex items-center justify-center text-muted-foreground hover:bg-accent rounded-full transition-colors">
         <span className="sr-only">Toggle theme</span>
         <div className="w-5 h-5" />
       </button>
@@ -73,7 +73,7 @@ function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="w-10 h-10 flex items-center justify-center text-[#333d4b] dark:text-[#b0b8c1] hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors"
+      className="w-10 h-10 flex items-center justify-center text-foreground hover:bg-accent rounded-full transition-colors"
     >
       <span className="sr-only">Toggle theme</span>
       {theme === 'dark' ? (
@@ -129,7 +129,7 @@ export default function Home() {
                   placeholder="도구 검색..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-white dark:bg-[#20202c] text-[#191f28] dark:text-white px-4 py-2 rounded-xl border-none outline-none ring-2 ring-transparent focus:ring-[#3182f6] transition-all"
+                  className="w-full bg-white dark:bg-[#20202c] text-foreground px-4 py-2 rounded-xl border-none outline-none ring-2 ring-transparent focus:ring-[var(--primary)] transition-all"
                 />
               </div>
               <button
@@ -184,7 +184,7 @@ export default function Home() {
 
             <Section
               title="모든 서비스"
-              action={<span className="text-[14px] font-medium text-[#3182f6]">가나다순</span>}
+              action={<span className="text-[14px] font-medium text-muted-foreground">가나다순</span>}
             >
               {Object.entries(groupedTools).map(([category, categoryTools]) => (
                 <div key={category} className="mb-8 last:mb-0">
